@@ -1,0 +1,611 @@
+[
+  {
+    "matchStrings": [
+      "DnB",
+      "Drum and Bass",
+      "D&B",
+      "Drum n Bass",
+      "DrumAndBass",
+      "DrumnBass",
+      "Drum&Bass",
+      "Drum'n'Bass",
+      "Drum'n Bass"
+    ],
+    "name": "Drum and Bass"
+  },
+  {
+    "matchStrings": [
+      " Rap ",
+      ",Rap",
+      "/Rap",
+      "Rap/",
+      "Rap,"
+    ],
+    "name": "Rap"
+  },
+  {
+    "matchStrings": [
+      "trap"
+    ],
+    "name": "Trap"
+  },
+  {
+    "matchStrings": [
+      "Dub",
+      "dubix"
+    ],
+    "name": "Dub",
+    "exceptions": [
+      "dubstep"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Reggae"
+    ],
+    "name": "Reggae"
+  },
+  {
+    "matchStrings": [
+      "Jazz"
+    ],
+    "name": "Jazz"
+  },
+  {
+    "matchStrings": [
+      "Hip Hop",
+      "HipHop",
+      "Hip-Hop"
+    ],
+    "name": "Hip-Hop"
+  },
+  {
+    "matchStrings": [
+      "Dubstep"
+    ],
+    "name": "Dubstep"
+  },
+  {
+    "matchStrings": [
+      "disco"
+    ],
+    "name": "Disco",
+    "exceptions": [
+      "discographie"
+    ]
+  },
+  {
+    "matchStrings": [
+      "dancehall"
+    ],
+    "name": "Dancehall"
+  },
+  {
+    "matchStrings": [
+      "Rock",
+      "RocknRoll",
+      "Rock'n'Roll",
+      "Rock'n Roll",
+      "Rock 'n' Roll",
+      "Rock and Roll",
+      "Rock & Roll",
+      "Rock&Roll"
+    ],
+    "name": "Rock",
+    "exceptions": [
+      "Punk Rock",
+      "Punk-Rock",
+      "PunkRock",
+      "Garage Rock",
+      "Garage-Rock",
+      "GarageRock",
+      "Hard Rock",
+      "Hard-Rock",
+      "HardRock",
+      "Alternative Rock",
+      "Alternative-Rock",
+      "AlternativeRock"
+    ]
+  },
+  {
+    "name": "Punk Rock",
+    "matchStrings": [
+      "Punk Rock",
+      "Punk-Rock",
+      "PunkRock"
+    ]
+  },
+  {
+    "name": "Garage Rock",
+    "matchStrings": [
+      "Garage Rock",
+      "Garage-Rock",
+      "GarageRock"
+    ]
+  },
+  {
+    "name": "Hard Rock",
+    "matchStrings": [
+      "Hard Rock",
+      "Hard-Rock",
+      "HardRock"
+    ]
+  },
+  {
+    "name": "Alternative Rock",
+    "matchStrings": [
+      "Alternative Rock",
+      "Alternative-Rock",
+      "AlternativeRock"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Trance"
+    ],
+    "name": "Trance",
+    "exceptions": [
+      "Psytrance",
+      "Psy trance",
+      "Psy-trance",
+      "Acid Trance",
+      "Acid-Trance",
+      "AcidTrance"
+    ]
+  },
+  {
+    "name": "Psytrance",
+    "matchStrings": [
+      "Psytrance",
+      "Psy trance",
+      "Psy-trance"
+    ]
+  },
+  {
+    "name": "Acid Trance",
+    "matchStrings": [
+      "Acid Trance",
+      "Acid-Trance",
+      "AcidTrance"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Techno",
+      "Tekno"
+    ],
+    "name": "Techno"
+  },
+  {
+    "matchStrings": [
+      "House",
+      "House Music",
+      "House-Music"
+    ],
+    "name": "House",
+    "exceptions": [
+      "Future House",
+      "Future-House",
+      "FutureHouse",
+      "Bass House",
+      "Bass-House",
+      "BassHouse",
+      "Deep House",
+      "Deep-House",
+      "DeepHouse",
+      "Tropical House",
+      "Tropical-House",
+      "TropicalHouse",
+      "tech house",
+      "tech-house",
+      "techhouse",
+      "afro house",
+      "afro-house",
+      "afrohouse"
+    ]
+  },
+  {
+    "name": "Future House",
+    "matchStrings": [
+      "Future House",
+      "Future-House",
+      "FutureHouse"
+    ]
+  },
+  {
+    "name": "Bass House",
+    "matchStrings": [
+      "Bass House",
+      "Bass-House",
+      "BassHouse"
+    ]
+  },
+  {
+    "name": "Deep House",
+    "matchStrings": [
+      "Deep House",
+      "Deep-House",
+      "DeepHouse"
+    ]
+  },
+  {
+    "name": "Tropical House",
+    "matchStrings": [
+      "Tropical House",
+      "Tropical-House",
+      "TropicalHouse"
+    ]
+  },
+  {
+    "name": "Tech House",
+    "matchStrings": [
+      "tech house",
+      "tech-house",
+      "techhouse"
+    ]
+  },
+  {
+    "name": "Afro House",
+    "matchStrings": [
+      "afro house",
+      "afro-house",
+      "afrohouse"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Core"
+    ],
+    "name": "Core",
+    "exceptions": [
+      "encore",
+      "French Core",
+      "French-Core",
+      "FrenchCore",
+      "HardCore",
+      "HardCore.",
+      "Hard Core",
+      "Hard-Core",
+      "MetalCore",
+      "Metal Core",
+      "Metal-Core"
+    ]
+  },
+  {
+    "name": "FrenchCore",
+    "matchStrings": [
+      "French Core",
+      "French-Core",
+      "FrenchCore"
+    ]
+  },
+  {
+    "name": "HardCore",
+    "matchStrings": [
+      "HardCore",
+      "HardCore.",
+      "Hard Core",
+      "Hard-Core"
+    ]
+  },
+  {
+    "name": "MetalCore",
+    "matchStrings": [
+      "MetalCore",
+      "Metal Core",
+      "Metal-Core"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Salsa"
+    ],
+    "name": "Salsa"
+  },
+  {
+    "matchStrings": [
+      " Rai ",
+      " Raï "
+    ],
+    "name": "Raï"
+  },
+  {
+    "matchStrings": [
+      "Country"
+    ],
+    "name": "Country"
+  },
+  {
+    "matchStrings": [
+      "Funk"
+    ],
+    "name": "Funk"
+  },
+  {
+    "matchStrings": [
+      "Blues"
+    ],
+    "name": "Blues"
+  },
+  {
+    "matchStrings": [
+      " Soul ",
+      ",Soul",
+      " Soul,",
+      "Soul/",
+      "/Soul",
+      "Soul "
+    ],
+    "name": "Soul"
+  },
+  {
+    "matchStrings": [
+      "Afrotrap",
+      "Afro Trap",
+      "Afro-trap"
+    ],
+    "name": "Afrotrap"
+  },
+  {
+    "matchStrings": [
+      "RnB",
+      "R&B",
+      "R & B",
+      "R n B",
+      "R'n'B"
+    ],
+    "name": "RnB"
+  },
+  {
+    "matchStrings": [
+      "Electro",
+      "EDM",
+      "Electronic",
+      "Electronica",
+      "électronique",
+      "électro"
+    ],
+    "name": "Electro"
+  },
+  {
+    "matchStrings": [
+      "Trip Hop",
+      "TripHop",
+      "Trip-Hop"
+    ],
+    "name": "Trip-Hop"
+  },
+  {
+    "matchStrings": [
+      "Tropical Bass",
+      "Tropical-Bass",
+      "TropicalBass"
+    ],
+    "name": "Tropical Bass"
+  },
+  {
+    "matchStrings": [
+      "Punk"
+    ],
+    "name": "Punk",
+    "exceptions": [
+      "daft punk",
+      "daft-punk",
+      "Post Punk",
+      "Post-Punk",
+      "PostPunk"
+    ]
+  },
+  {
+    "matchStrings": [
+      " Pop ",
+      "Pop,"
+    ],
+    "name": "Pop",
+    "exceptions": [
+      "Pop Urbaine",
+      "PopUrbaine",
+      "Pop-Urbaine",
+      "Indie Pop",
+      "IndiePop",
+      "Indie-Pop"
+    ]
+  },
+  {
+    "name": "Pop Urbaine",
+    "matchStrings": [
+      "Pop Urbaine",
+      "PopUrbaine",
+      "Pop-Urbaine"
+    ]
+  },
+  {
+    "name": "Indie Pop",
+    "matchStrings": [
+      "Indie Pop",
+      "IndiePop",
+      "Indie-Pop"
+    ]
+  },
+  {
+    "matchStrings": [
+      "Swing"
+    ],
+    "name": "Swing"
+  },
+  {
+    "matchStrings": [
+      "karaoké",
+      "karaoke"
+    ],
+    "name": "Karaoké"
+  },
+  {
+    "matchStrings": [
+      "turn up",
+      "turn-up"
+    ],
+    "name": "Turn Up"
+  },
+  {
+    "matchStrings": [
+      "afrobeat",
+      "afro-beat",
+      "afro beat"
+    ],
+    "name": "Afrobeat"
+  },
+  {
+    "matchStrings": [
+      "Hardtek",
+      "Hardteck"
+    ],
+    "name": "Hardtek"
+  },
+  {
+    "matchStrings": [
+      "Uptempo"
+    ],
+    "name": "Uptempo"
+  },
+  {
+    "matchStrings": [
+      "Zouk"
+    ],
+    "name": "Zouk"
+  },
+  {
+    "matchStrings": [
+      "BeatBox",
+      "Beat-Box",
+      "Beat Box"
+    ],
+    "name": "BeatBox"
+  },
+  {
+    "matchStrings": [
+      "BlindTest",
+      "Blind-Test",
+      "Blind Test"
+    ],
+    "name": "Blind Test"
+  },
+  {
+    "matchStrings": [
+      "Metal",
+      "Métal"
+    ],
+    "name": "Métal",
+    "exceptions": [
+      "MetalCore",
+      "Metal Core",
+      "Metal-Core"
+    ]
+  },
+  {
+    "matchStrings": [
+      "gospel"
+    ],
+    "name": "Gospel"
+  },
+  {
+    "matchStrings": [
+      "années 90",
+      "année 90",
+      "90's",
+      "90'",
+      "soirée 90"
+    ],
+    "name": "Années 90",
+    "searchOnlyInTitle": true
+  },
+  {
+    "matchStrings": [
+      "années 80",
+      "année 80",
+      "80's",
+      "80'",
+      "soirée 80"
+    ],
+    "name": "Années 80",
+    "searchOnlyInTitle": true
+  },
+  {
+    "matchStrings": [
+      "quizz"
+    ],
+    "name": "Quizz"
+  },
+  {
+    "matchStrings": [
+      "années 70",
+      "année 70",
+      "70's",
+      "70'",
+      "soirée 70"
+    ],
+    "name": "Années 70",
+    "searchOnlyInTitle": true
+  },
+  {
+    "matchStrings": [
+      "années 60",
+      "année 60",
+      "60's",
+      "60'",
+      "soirée 60"
+    ],
+    "name": "Années 60",
+    "searchOnlyInTitle": true
+  },
+  {
+    "matchStrings": [
+      "années 2000",
+      "année 2000",
+      "2000's",
+      "2000'",
+      "soirée 2000"
+    ],
+    "name": "Années 2000",
+    "searchOnlyInTitle": true
+  },
+  {
+    "matchStrings": [
+      "tango"
+    ],
+    "name": "Tango"
+  },
+  {
+    "matchStrings": [
+      "jam session",
+      "jam-session",
+      "jamsession"
+    ],
+    "name": "Jam Session"
+  },
+  {
+    "matchStrings": [
+      "beer pong",
+      "beer-pong",
+      "beerpong",
+      "bière pong",
+      "bière-pong",
+      "bièrepong"
+    ],
+    "name": "Beer Pong"
+  },
+  {
+    "matchStrings": [
+      "bass music",
+      "bass-music",
+      "bassmusic"
+    ],
+    "name": "Bass Music"
+  },
+  {
+    "matchStrings": [
+      "ragga"
+    ],
+    "name": "Ragga"
+  }
+]
