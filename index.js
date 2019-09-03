@@ -46,65 +46,6 @@ const determineEventMusicStyles = (
   return ['Indéfini'];
 }
 
-// const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
-//   const musicGenres = [];
-//   let subgenreFound = false;
-
-//   // Load music styles for bot if bot as asking for this method, or load music styles for string parsing
-//   allMusicStyles = p_isBotAsking ? musicStylesBot : musicStylesVanilla;
-
-//   // Affiliate music styles vanilla or for bot
-//   for (let i = 0; i < allMusicStyles.length; i++) {
-//     const musicStyle = allMusicStyles[i];
-
-//     // If the style is set as search only in title (80's, 90's, etc...) and if we aren't
-//     // in case where we search in title we go to the next style
-//     if (musicStyle.searchOnlyInTitle && !p_searchForTitleOrTag) {
-//       continue;
-//     }
-
-//     for (let j = 0; j < musicStyle.matchStrings.length; j++) {
-//       let matchString = musicStyle.matchStrings[j].toLowerCase();
-
-//       // Tags from events can have 'white spaces' so we remove them
-//       if (p_isForBlueRectangle) matchString = matchString.trim();
-
-//       // Style recognized
-//       if (p_string.toLowerCase().includes(matchString)) {
-//         subgenreFound = false;
-//         // But if there is a subgenre maybe we can find a more precise style
-//         if (musicStyle.subgenres) {
-//           for (let k = 0; k < musicStyle.subgenres.length; k++) {
-//             const musicStyleSubgenre = musicStyle.subgenres[k];
-
-//             for (let l = 0; l < musicStyleSubgenre.matchStrings.length; l++) {
-//               const matchStringSubgenre = musicStyleSubgenre.matchStrings[l].toLowerCase();
-
-//               if (p_string.toLowerCase().includes(matchStringSubgenre)) {
-//                 // Cast to array for matchStringSubgenre because function treats on arrays (for the use
-//                 // inside the if (!subgenreFound) which need to check for all matchStrings before pushing)
-//                 if (!isGenreFoundViaException([matchStringSubgenre], musicStyle.exceptions, p_string.toLowerCase())) {
-//                   musicGenres.push(musicStyleSubgenre.name);
-//                   subgenreFound = true;
-//                 }
-//                 break;
-//               }
-//             }
-//           }
-//           // Case no subgenre found or when there was no subgenre for that style
-//         } if (!subgenreFound) {
-//           if (!isGenreFoundViaException(musicStyle.matchStrings, musicStyle.exceptions, p_string.toLowerCase())) {
-//             musicGenres.push(musicStyle.name);
-//             // Other cases
-//           }
-//           break;
-//         }
-//       }
-//     }
-//   }
-//   return musicGenres;
-// }
-
 const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
   const musicGenres = [];
 
@@ -193,10 +134,8 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
   return true;
 }
 
-console.log(determineMusicGenresFromString(false, 'hardcore cic trance est rap un text basshouse et dnb funky', false));
-
-// module.exports = {
-//   determineEventMusicStyles,
-//   determineMusicGenresFromString,
-//   isGenreFoundViaException
-// };
+module.exports = {
+  determineEventMusicStyles,
+  determineMusicGenresFromString,
+  isGenreFoundViaException
+};
