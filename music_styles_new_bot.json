@@ -17,7 +17,10 @@
     "matchStrings": [
       "rap"
     ],
-    "name": "Rap"
+    "name": "Rap",
+    "exceptions": [
+      "trap"
+    ]
   },
   {
     "matchStrings": [
@@ -27,12 +30,12 @@
   },
   {
     "matchStrings": [
-      "Dub",
-      "dubix"
+      "Dub"
     ],
     "name": "Dub",
     "exceptions": [
-      "dubstep"
+      "dubstep",
+      "dubliners"
     ]
   },
   {
@@ -316,7 +319,10 @@
       "Funk",
       "Funky"
     ],
-    "name": "Funk"
+    "name": "Funk",
+    "exceptions": [
+      "cyberfunk"
+    ]
   },
   {
     "matchStrings": [

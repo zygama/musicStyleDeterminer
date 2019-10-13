@@ -31,12 +31,12 @@
   },
   {
     "matchStrings": [
-      "Dub",
-      "dubix"
+      "Dub"
     ],
     "name": "Dub",
     "exceptions": [
-      "dubstep"
+      "dubstep",
+      "dubliners"
     ]
   },
   {
@@ -319,7 +319,10 @@
     "matchStrings": [
       "Funk"
     ],
-    "name": "Funk"
+    "name": "Funk",
+    "exceptions": [
+      "cyberfunk"
+    ]
   },
   {
     "matchStrings": [
