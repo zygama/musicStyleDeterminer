@@ -113,6 +113,11 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
           const startIndexMatchString = indexMatchString;
           const endIndexMatchString = indexMatchString + p_matchString.length;
 
+          console.log("startIndexMatchStringException: ",startIndexMatchStringException);
+          console.log("endIndexMatchStringException: ",endIndexMatchStringException);
+          console.log("startIndexMatchString: ",startIndexMatchString);
+          console.log("endIndexMatchString: ",endIndexMatchString);
+
           // Check if match string position is between match string exception
           // If yes return true because the string was found via the exception
           if (startIndexMatchString >= startIndexMatchStringException
