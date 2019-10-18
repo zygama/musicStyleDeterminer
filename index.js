@@ -74,6 +74,8 @@ const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitl
 
         if (!isGenreFoundViaException(matchString, musicStyle.exceptions, p_string.toLowerCase())) {
           musicGenres.push(musicStyle.name);
+          // Try to break to avoid double string style in array (['electro, 'electro])
+          break;
         }
       }
     }
