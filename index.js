@@ -85,12 +85,13 @@ const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitl
 
 // e.g punk found for daft punk
 const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_string) => {
+  let stringToExplore = p_string;
   let isGenreFoundViaException = [];
 
   // Get all index of the match string inside string
   // Loop over it later, usefull if there is multiple styles with the same base,
   // For example Bass House and House the two will be found (it wasn't the case with subgenres)
-  const indexesMatch = getAllIndexes(p_string, p_matchString);
+  const indexesMatch = getAllIndexes(stringToExplore, p_matchString);
   console.log('indexesMatch ', indexesMatch);
 
   // If there is match strings exceptions for this music genre
@@ -101,14 +102,14 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
 
       // For each index match string loop over all exceptions
       for (let i = 0; i < p_matchStringExceptions.length; i++) {
-        let resultForThisException = null;
         const matchStringException = p_matchStringExceptions[i].toLowerCase();
 
         // If exception found in string
-        if (p_string.toLowerCase().includes(matchStringException)) {
+        if (stringToExplore.toLowerCase().includes(matchStringException)) {
+          // Couper la string au niveau du premier trouvé après le premier cas
           console.log(`Test exception for ${p_matchString}, exception: ${matchStringException}`);
-          const startIndexMatchStringException = p_string.indexOf(matchStringException);
-          const endIndexMatchStringException = p_string.indexOf(matchStringException) + matchStringException.length;
+          const startIndexMatchStringException = stringToExplore.indexOf(matchStringException);
+          const endIndexMatchStringException = stringToExplore.indexOf(matchStringException) + matchStringException.length;
           const startIndexMatchString = indexMatchString;
           const endIndexMatchString = indexMatchString + p_matchString.length;
 
@@ -117,6 +118,10 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
           if (startIndexMatchString >= startIndexMatchStringException
             && endIndexMatchString <= endIndexMatchStringException) {
             console.log(`Genre ${p_matchString} found via exception ${matchStringException}`);
+            // When we found via exception we delete what was before the endIndexMatchString in stringToExplore,
+            // so stringToExplore.indexOf(matchStringException) will not return the first occurence anymore
+            // which was leading to a bug
+            stringToExplore = stringToExplore.substring(endIndexMatchString);
             resultForThisMatchString.push(true);
           } else {
             resultForThisMatchString.push(false);
