@@ -85,19 +85,19 @@ const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitl
 
 // e.g punk found for daft punk
 const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_string) => {
-  let stringToExplore = p_string;
-  let isGenreFoundViaException = [];
-
-  // Get all index of the match string inside string
-  // Loop over it later, usefull if there is multiple styles with the same base,
-  // For example Bass House and House the two will be found (it wasn't the case with subgenres)
-  const indexesMatch = getAllIndexes(stringToExplore, p_matchString);
-  console.log('indexesMatch ', indexesMatch);
-
   // If there is match strings exceptions for this music genre
   if (p_matchStringExceptions) {
+    let stringToExplore = p_string;
+    let isGenreFoundViaException = [];
+
+    // Get all index of the match string inside string
+    // Loop over it later, usefull if there is multiple styles with the same base,
+    // For example Bass House and House the two will be found (it wasn't the case with subgenres)
+    const indexesMatch = getAllIndexes(stringToExplore, p_matchString);
+    console.log('indexesMatch ', indexesMatch);
+
     // Loop over all indexes match
-    indexesMatch.forEach(indexMatchString => {
+    indexesMatch.forEach((indexMatchString, index) => {
       let resultForThisMatchString = [];
 
       // For each index match string loop over all exceptions
@@ -106,10 +106,12 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
 
         // If exception found in string
         if (stringToExplore.toLowerCase().includes(matchStringException)) {
-          // Couper la string au niveau du premier trouvé après le premier cas
+          // With .idexOf(): Search from 0 for the first then from previous indexMatchString
+          let indexToStartIndexOf = index === 0 ? index : indexMatchString[index - 1] + p_matchString.length;
+
           console.log(`Test exception for ${p_matchString}, exception: ${matchStringException}`);
-          const startIndexMatchStringException = stringToExplore.indexOf(matchStringException);
-          const endIndexMatchStringException = stringToExplore.indexOf(matchStringException) + matchStringException.length;
+          const startIndexMatchStringException = stringToExplore.indexOf(matchStringException, indexToStartIndexOf);
+          const endIndexMatchStringException = stringToExplore.indexOf(matchStringException, indexToStartIndexOf) + matchStringException.length;
           const startIndexMatchString = indexMatchString;
           const endIndexMatchString = indexMatchString + p_matchString.length;
 
@@ -126,7 +128,7 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
             // When we found via exception we delete what was before the endIndexMatchString in stringToExplore,
             // so stringToExplore.indexOf(matchStringException) will not return the first occurence anymore
             // which was leading to a bug
-            stringToExplore = stringToExplore.substring(endIndexMatchString);
+            // stringToExplore = stringToExplore.substring(endIndexMatchString);
             resultForThisMatchString.push(true);
           } else {
             resultForThisMatchString.push(false);
