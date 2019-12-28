@@ -1,6 +1,6 @@
 {
   "name": "musicstyleidentifier",
-  "version": "1.0.7",
+  "version": "1.0.21",
   "description": "Small package to determine music style from a string",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/zygama/musicStyleDeterminer/issues"
   },
-  "homepage": "https://github.com/zygama/musicStyleDeterminer#readme"
+  "homepage": "https://github.com/zygama/musicStyleDeterminer#readme",
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
 }

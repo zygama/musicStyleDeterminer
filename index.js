@@ -1,42 +1,43 @@
-const musicStylesVanilla = require('./music_styles_new.json');
-const musicStylesBot = require('./music_styles_new_bot.json');
-const { getAllIndexes } = require('./utils');
-
-let allMusicStyles = null;
+const axios = require('axios');
+const { getAllIndexes, uniformMusicStylesMatchStringsBot, backendUrl, uniqueArray } = require('./utils');
 
 
-const determineEventMusicStyles = (
+const determineEventMusicStyles = async (
   p_eventName,
   p_blueRectanglesStrings,
   p_eventDescription
 ) => {
-  let musicStylesFound = []; // TODO: declaration seems useless
+  let musicStylesFound = [];
   let foundElectroStringInTitle = false;
 
   // 1: Test if event name contains a music style, if yes return directly the style(s)
   //    without testing for blue rectangles and description
-  musicStylesFound = determineMusicGenresFromString(false, p_eventName, true);
+  musicStylesFound = await determineMusicStylesFromString(false, p_eventName, true);
   // If Electro found do not return electro as only style found for the title (pretty common, better to search more)
   if (musicStylesFound.length === 1 && musicStylesFound[0] === 'Electro') {
     foundElectroStringInTitle = true;
     musicStylesFound = [];
   }
-  if (musicStylesFound.length > 0 && !foundElectroStringInTitle) {
-    console.log(foundElectroStringInTitle);
-    return musicStylesFound;
-  }
+  // Comment this code because we now want to concat the styles found in title and tags
+  // if (musicStylesFound.length > 0 && !foundElectroStringInTitle) {
+  //   return musicStylesFound;
+  // }
 
   // 2: Test if blue rectangles contains a music style, if yes return directly the style(s)
   //    without testing for description
   // This for test for each blue rectangle and concat results (if multi genres)
   for (let i = 0; i < p_blueRectanglesStrings.length; i++) {
-    const musicStyleFromBlueRectangle = determineMusicGenresFromString(false, p_blueRectanglesStrings[i], true, true);
-    if (musicStyleFromBlueRectangle.length > 0) musicStylesFound = musicStylesFound.concat(musicStyleFromBlueRectangle);
+    const musicStyleFromBlueRectangle = await determineMusicStylesFromString(false, p_blueRectanglesStrings[i], true, true);
+    if (musicStyleFromBlueRectangle.length > 0) {
+      musicStylesFound = musicStylesFound.concat(musicStyleFromBlueRectangle);
+
+    } 
   }
-  if (musicStylesFound.length > 0) return musicStylesFound;
+  // Return array of styles via unqiue array function because it could have duplicate from title and tags
+  if (musicStylesFound.length > 0) return uniqueArray(musicStylesFound);
 
   // 3: Test if description contains a music style, if yes return directly the style(s)
-  musicStylesFound = determineMusicGenresFromString(false, p_eventDescription, false);
+  musicStylesFound = await determineMusicStylesFromString(false, p_eventDescription, false);
   if (musicStylesFound.length > 0) return musicStylesFound;
 
   // If no music style found, return an undefined style or Electro if it was found in title
@@ -46,13 +47,12 @@ const determineEventMusicStyles = (
   return ['Indéfini'];
 }
 
-const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
+const determineMusicStylesFromString = async (p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
   const musicGenres = [];
 
-  // Load music styles for bot if bot as asking for this method, or load music styles for string parsing
-  allMusicStyles = p_isBotAsking ? musicStylesBot : musicStylesVanilla;
+  let allMusicStyles = await axios.get(`${backendUrl}/music-styles`);
+  allMusicStyles = allMusicStyles.data;
 
-  // Affiliate music styles vanilla or for bot
   for (let i = 0; i < allMusicStyles.length; i++) {
     const musicStyle = allMusicStyles[i];
 
@@ -85,16 +85,17 @@ const determineMusicGenresFromString = (p_isBotAsking, p_string, p_searchForTitl
 
 // e.g punk found for daft punk
 const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_string) => {
+  let isGenreFoundViaExceptionArray = [];
+
   // If there is match strings exceptions for this music genre
-  if (p_matchStringExceptions) {
+  if (p_matchStringExceptions && p_matchStringExceptions.length > 0) {
     let stringToExplore = p_string;
-    let isGenreFoundViaException = [];
 
     // Get all index of the match string inside string
     // Loop over it later, usefull if there is multiple styles with the same base,
     // For example Bass House and House the two will be found (it wasn't the case with subgenres)
     const indexesMatch = getAllIndexes(stringToExplore, p_matchString);
-    console.log('indexesMatch ', indexesMatch);
+    // console.log('indexesMatch ', indexesMatch);
 
     // Loop over all indexes match
     indexesMatch.forEach((indexMatchString, index) => {
@@ -107,7 +108,8 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
         // If exception found in string
         if (stringToExplore.toLowerCase().includes(matchStringException)) {
           // With .idexOf(): Search from 0 for the first then from previous indexMatchString
-          let indexToStartIndexOf = index === 0 ? index : indexMatchString[index - 1] + p_matchString.length;
+          let indexToStartIndexOf = index === 0 ? index : indexesMatch[index - 1] + p_matchString.length;
+          // console.log('indexToStartIndexOf: ', indexToStartIndexOf);
 
           console.log(`Test exception for ${p_matchString}, exception: ${matchStringException}`);
           const startIndexMatchStringException = stringToExplore.indexOf(matchStringException, indexToStartIndexOf);
@@ -115,41 +117,49 @@ const isGenreFoundViaException = (p_matchString, p_matchStringExceptions, p_stri
           const startIndexMatchString = indexMatchString;
           const endIndexMatchString = indexMatchString + p_matchString.length;
 
-          console.log("startIndexMatchStringException: ",startIndexMatchStringException);
-          console.log("endIndexMatchStringException: ",endIndexMatchStringException);
-          console.log("startIndexMatchString: ",startIndexMatchString);
-          console.log("endIndexMatchString: ",endIndexMatchString);
+          // console.log("startIndexMatchStringException: ",startIndexMatchStringException);
+          // console.log("endIndexMatchStringException: ",endIndexMatchStringException);
+          // console.log("startIndexMatchString: ",startIndexMatchString);
+          // console.log("endIndexMatchString: ",endIndexMatchString);
 
           // Check if match string position is between match string exception
           // If yes return true because the string was found via the exception
           if (startIndexMatchString >= startIndexMatchStringException
             && endIndexMatchString <= endIndexMatchStringException) {
             console.log(`Genre ${p_matchString} found via exception ${matchStringException}`);
-            // When we found via exception we delete what was before the endIndexMatchString in stringToExplore,
+            // When we foind via exception we delete what was before the endIndexMatchString in stringToExplore,
             // so stringToExplore.indexOf(matchStringException) will not return the first occurence anymore
             // which was leading to a bug
-            // stringToExplore = stringToExplore.substring(endIndexMatchString);
             resultForThisMatchString.push(true);
           } else {
             resultForThisMatchString.push(false);
           }
         }
       }
-      console.log('resultForThisMatchString', resultForThisMatchString);
+      // console.log('resultForThisMatchString', resultForThisMatchString);
       // If previous match string wasn't exception, push false to array to chech later
-      if (resultForThisMatchString.indexOf(true) >= 0) isGenreFoundViaException.push(true)
-      else isGenreFoundViaException.push(false);
+      if (resultForThisMatchString.indexOf(true) >= 0) isGenreFoundViaExceptionArray.push(true)
+      else isGenreFoundViaExceptionArray.push(false);
     });
   } else {
     return false;
   }
   // Check if false is inside array, if yes string wasn't found via exceptions
-  if (isGenreFoundViaException.find(result => result === false) === false) return false;
+  if (isGenreFoundViaExceptionArray.includes(false)) return false;
   return true;
 }
 
 module.exports = {
   determineEventMusicStyles,
-  determineMusicGenresFromString,
+  determineMusicStylesFromString,
   isGenreFoundViaException
 };
+
+// (async () => {
+//   console.log(await determineEventMusicStyles(
+//     'ceci est un event',
+//     [],
+//     'Diabolique d&b à la base être un album solo de l’actrice Emmanuelle Seigner, composé par les Français The Limiñanas et produit à Berlin par l’Américain Anton Newcombe le leader de The Brian Jonestown Massacre . Mais un rêve est venu bouleverser ces plans. Il en est né un vrai groupe, baptisé L’Epée, une tournée, un album intense et quelques lettres d’amour émues au rock\’n\'roll, cette musique qui sauve des vies.'
+//   ));
+// })();
+
