@@ -28,7 +28,7 @@ const determineEventMusicStyles = async (
   //    without testing for description
   // This for test for each blue rectangle and concat results (if multi genres)
   for (let i = 0; i < p_blueRectanglesStrings.length; i++) {
-    const musicStyleFromBlueRectangle = await determineMusicStylesFromString(false, p_blueRectanglesStrings[i], true, true);
+    const musicStyleFromBlueRectangle = await determineMusicStylesFromString(backendUrl, false, p_blueRectanglesStrings[i], true, true);
     if (musicStyleFromBlueRectangle.length > 0) {
       musicStylesFound = musicStylesFound.concat(musicStyleFromBlueRectangle);
 
@@ -38,7 +38,7 @@ const determineEventMusicStyles = async (
   if (musicStylesFound.length > 0) return uniqueArray(musicStylesFound);
 
   // 3: Test if description contains a music style, if yes return directly the style(s)
-  musicStylesFound = await determineMusicStylesFromString(false, p_eventDescription, false);
+  musicStylesFound = await determineMusicStylesFromString(backendUrl, false, p_eventDescription, false);
   if (musicStylesFound.length > 0) return musicStylesFound;
 
   // If no music style found, return an undefined style or Electro if it was found in title
