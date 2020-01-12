@@ -1,8 +1,9 @@
 const axios = require('axios');
-const { getAllIndexes, uniformMusicStylesMatchStringsBot, backendUrl, uniqueArray } = require('./utils');
+const { getAllIndexes, uniformMusicStylesMatchStringsBot, uniqueArray } = require('./utils');
 
 
 const determineEventMusicStyles = async (
+  backendUrl,
   p_eventName,
   p_blueRectanglesStrings,
   p_eventDescription
@@ -12,7 +13,7 @@ const determineEventMusicStyles = async (
 
   // 1: Test if event name contains a music style, if yes return directly the style(s)
   //    without testing for blue rectangles and description
-  musicStylesFound = await determineMusicStylesFromString(false, p_eventName, true);
+  musicStylesFound = await determineMusicStylesFromString(backendUrl, false, p_eventName, true);
   // If Electro found do not return electro as only style found for the title (pretty common, better to search more)
   if (musicStylesFound.length === 1 && musicStylesFound[0] === 'Electro') {
     foundElectroStringInTitle = true;
@@ -47,7 +48,7 @@ const determineEventMusicStyles = async (
   return ['Indéfini'];
 }
 
-const determineMusicStylesFromString = async (p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
+const determineMusicStylesFromString = async (backendUrl, p_isBotAsking, p_string, p_searchForTitleOrTag, p_isForBlueRectangle = false) => {
   const musicGenres = [];
 
   let allMusicStyles = await axios.get(`${backendUrl}/music-styles`);
@@ -158,7 +159,7 @@ module.exports = {
 // (async () => {
 //   console.log(await determineEventMusicStyles(
 //     'ceci est un event',
-//     [],
+//     ['Stoner Rock', 'Alternative Rock', 'Garage Rock'],
 //     'Diabolique d&b à la base être un album solo de l’actrice Emmanuelle Seigner, composé par les Français The Limiñanas et produit à Berlin par l’Américain Anton Newcombe le leader de The Brian Jonestown Massacre . Mais un rêve est venu bouleverser ces plans. Il en est né un vrai groupe, baptisé L’Epée, une tournée, un album intense et quelques lettres d’amour émues au rock\’n\'roll, cette musique qui sauve des vies.'
 //   ));
 // })();
