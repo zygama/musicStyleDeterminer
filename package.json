@@ -4,7 +4,8 @@
   "description": "Small package to determine music style from a string (given a list of music styles specified in types.ts)",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
